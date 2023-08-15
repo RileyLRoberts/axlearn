@@ -348,6 +348,7 @@ class TensorStoreStateStorage(StateStorage):
         validation: CheckpointValidationType = CheckpointValidationType.EXACT,
         concurrent_gb: int = 32,
     ) -> NestedTensor:
+        validation = CheckpointValidationType.EXACT_UP_TO_DTYPE
         spec = self._get_spec(step, state, ckpt_dir)
         logging.info("Restoring checkpoint from directory %s", ckpt_dir)
         with tf.io.gfile.GFile(os.path.join(ckpt_dir, "index"), "r") as f:
